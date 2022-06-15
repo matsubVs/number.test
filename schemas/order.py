@@ -7,7 +7,7 @@ from pydantic.class_validators import validator
 class OrderModel(BaseModel):
     """Модель заказа для валидации"""
 
-    table_row = int
+    table_row: int
     order_number: int
     usd_price: float
     rub_price: float
@@ -18,9 +18,8 @@ class OrderModel(BaseModel):
 
     @validator("expired_date", pre=True)
     def check_date(cls, v):
-        now = datetime.date.today()
-        v_date = datetime.datetime.strptime(v, "%d.%m.%Y").date()
-        if v_date < now:
-            raise ValueError('The date expired')
-        else:
+        if isinstance(v, str):
+            now = datetime.date.today()
+            v_date = datetime.datetime.strptime(v, "%d.%m.%Y").date()
             return v_date
+        return  v

@@ -1,13 +1,13 @@
-import gspread
-from gspread.worksheet import Worksheet
-from gspread import Client
-from config import *
+from typing import Dict, List
 
-from typing import List, Dict
+import gspread
+from gspread import Client
+from gspread.worksheet import Worksheet
+
+from config import *
 
 
 class SheetAccessController:
-
     @staticmethod
     def get_client() -> Client:
         client = gspread.authorize(CREDENTIALS)

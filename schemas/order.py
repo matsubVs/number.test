@@ -12,6 +12,7 @@ class OrderModel(BaseModel):
     usd_price: float
     rub_price: float
     expired_date: datetime.date
+    notified: bool
 
     class Config:
         orm_mode = True

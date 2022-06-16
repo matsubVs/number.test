@@ -11,6 +11,7 @@ def parse_data(sheet_data):
             "order_number": raw_order["заказ №"],
             "usd_price": raw_order["стоимость,$"],
             "expired_date": raw_order["срок поставки"],
+            'notified': False
         }
         order["rub_price"] = usd_to_rub(float(order["usd_price"]))
 

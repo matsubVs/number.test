@@ -28,12 +28,15 @@ def main():
 
 
 def order_date_checker():
-    orders = orders_repo.get_order_dates()
-    today = datetime.date.today()
+    orders = orders_repo.get_outdated_orders()
 
-    for order in orders:
-        if order.expired_date < today:
-            send_message(order.order_number, order.expired_date)
+    m_orders = orders.all()
+
+    for order in m_orders:
+        send_message(order.order_number, order.expired_date)
+
+    orders_repo.set_notified(orders)
+
 
 
 if __name__ == "__main__":
@@ -42,7 +45,7 @@ if __name__ == "__main__":
 
     background_scheduler = BackgroundScheduler()
     background_scheduler.add_job(
-        order_date_checker, "interval", seconds=24, max_instances=2
+        order_date_checker, "interval", seconds=10, max_instances=2
     )
 
     try:

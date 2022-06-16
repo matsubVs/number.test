@@ -1,11 +1,14 @@
 import datetime
 import telebot
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import threading
 
 
-bot = telebot.TeleBot("5545318839:AAEUyTj6OSwaAI-B870xvn3ueDPYbCBZAk8", parse_mode=None)
+bot = telebot.TeleBot(os.getenv("TG_TOKEN"), parse_mode=None)
 
 
 @bot.message_handler(commands=["start"])
@@ -22,5 +25,4 @@ def send_message(order_number: int, order_date: datetime.date):
 
 
 my_thread = threading.Thread(target=lambda: bot.polling())
-print("thread is active")
 my_thread.start()

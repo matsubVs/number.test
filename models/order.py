@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, Float, Integer
+from sqlalchemy import Column, Date, Float, Integer, Boolean
 
 from database.database import DB
 
@@ -15,3 +15,4 @@ class Order(Model):
     usd_price = Column(Float, nullable=False)
     rub_price = Column(Float, nullable=False)
     expired_date = Column(Date, nullable=False)
+    notified = Column(Boolean, default=False)

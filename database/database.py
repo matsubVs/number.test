@@ -12,7 +12,7 @@ class DBLayer:
 
     db_config = {
         "drivername": "postgresql",
-        "host": "localhost",
+        "host": "pg",
         "port": 5432,
         "username": os.getenv("POSTGRES_USER"),
         "password": os.getenv("POSTGRES_PASSWORD"),

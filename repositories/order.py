@@ -69,9 +69,7 @@ class OrderRepository:
                 order_model.notified = False
 
                 if order_model != sheet_order_model:
-                    print('update')
                     update_data = sheet_order_model.dict(exclude_unset=True)
-
                     self.update(record.order_number, update_data)
 
                     del sheet_data[record.order_number]

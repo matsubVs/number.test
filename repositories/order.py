@@ -35,6 +35,7 @@ class OrderRepository:
     def create(self, order: OrderModel, commit=False) -> Order:
 
         db_order = Order(
+            table_row=order.table_row,
             order_number=order.order_number,
             usd_price=order.usd_price,
             rub_price=order.rub_price,

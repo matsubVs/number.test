@@ -10,7 +10,7 @@ class Order(Model):
 
     __tablename__ = "orders"
     id = Column(Integer, primary_key=True, nullable=False)
-    table_row = Column(Integer)
+    table_row = Column(Integer, nullable=False)
     order_number = Column(Integer, index=True, unique=True)
     usd_price = Column(Float, nullable=False)
     rub_price = Column(Float, nullable=False)

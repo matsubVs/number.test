@@ -22,4 +22,4 @@ class OrderModel(BaseModel):
             now = datetime.date.today()
             v_date = datetime.datetime.strptime(v, "%d.%m.%Y").date()
             return v_date
-        return  v
+        return v

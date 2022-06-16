@@ -4,10 +4,9 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 
-from currency_convertor import usd_to_rub
+from utils.parse_sheet_data import parse_data
 from database.database import DB
 from repositories.order import OrderRepository
-from schemas.order import OrderModel
 from sheets_controller.controller import SheetAccessController as Controller
 from tg.sender import send_message
 
@@ -23,21 +22,7 @@ def main():
     sheet = Controller.get_sheet(client)
     data = Controller.get_sheet_data(sheet)
 
-    process_data = {}
-
-    for raw_order in data:
-        print(raw_order['№'])
-        order = {
-            "table_row": raw_order["№"],
-            "order_number": raw_order["заказ №"],
-            "usd_price": raw_order["стоимость,$"],
-            "expired_date": raw_order["срок поставки"],
-        }
-        order["rub_price"] = usd_to_rub(float(order["usd_price"]))
-
-        order_model = OrderModel(**order)
-
-        process_data[order_model.order_number] = order_model
+    process_data = parse_data(data)
 
     orders_repo.create_from_dict(process_data)
 
@@ -53,10 +38,12 @@ def order_date_checker():
 
 if __name__ == "__main__":
     blocking_scheduler = BlockingScheduler()
-    blocking_scheduler.add_job(main, "interval", seconds=10)
+    blocking_scheduler.add_job(main, "interval", seconds=10, max_instances=2)
 
     background_scheduler = BackgroundScheduler()
-    background_scheduler.add_job(order_date_checker, 'interval', seconds=24)
+    background_scheduler.add_job(
+        order_date_checker, "interval", seconds=24, max_instances=2
+    )
 
     try:
         background_scheduler.start()

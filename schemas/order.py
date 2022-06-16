@@ -19,6 +19,7 @@ class OrderModel(BaseModel):
 
     @validator("expired_date", pre=True)
     def check_date(cls, v):
+        """Валидация и конвертация даты из строчки"""
         if isinstance(v, str):
             now = datetime.date.today()
             v_date = datetime.datetime.strptime(v, "%d.%m.%Y").date()

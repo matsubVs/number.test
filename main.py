@@ -28,6 +28,7 @@ def main():
 
 
 def order_date_checker():
+    """Отправка уведомления в телеграмм о просроченных поставках"""
     orders = orders_repo.get_outdated_orders()
 
     m_orders = orders.all()

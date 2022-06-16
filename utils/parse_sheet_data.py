@@ -3,6 +3,7 @@ from schemas.order import OrderModel
 
 
 def parse_data(sheet_data):
+    """Парсинг и создание Pydantic models из google sheets"""
     process_data = {}
 
     for raw_order in sheet_data:

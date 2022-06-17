@@ -18,7 +18,7 @@ class SheetAccessController:
     @staticmethod
     def get_sheet(client: Client) -> Worksheet:
         """Получение таблицы"""
-        sheet = client.open("Копия тестовое").sheet1
+        sheet = client.open(os.getenv("SHEET_FILE_NAME")).sheet1
 
         return sheet
 

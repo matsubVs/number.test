@@ -1,5 +1,6 @@
 # Тестовое задание от компании Numbers
-[ТЗ](https://soldigital.notion.site/soldigital/developer-5b79683045a64129a2625a19bfb0c944)
+[ТЗ](https://soldigital.notion.site/soldigital/developer-5b79683045a64129a2625a19bfb0c944) </br>
+[Ссылка на Google Sheets документ](https://docs.google.com/spreadsheets/d/1WVv67Ma43A0lWml8r1wH1Wq14jD4-lLfoxnpkTBUjlw/edit#gid=0)
 ## Настройка проекта
 1. Перейдите по [ссылке](https://console.developers.google.com/)
 2. Библиотека – Создать проект

@@ -65,12 +65,14 @@ class OrderRepository:
         else:
             result = self.compare_data(db_data, order_dict)
 
-    def compare_data(self, db_data: List[Order], sheet_data: Dict[int, OrderModel]) -> bool:
+    def compare_data(
+        self, db_data: List[Order], sheet_data: Dict[int, OrderModel]
+    ) -> bool:
         """Сопоставление данных из таблицы с данными из БД
         1. Если запись не изменилась в таблице и есть в БД - удаляем из табличного списка
         2. Если нет, вносим изменения в заказ из бд, потом удаляем
         3. Если номера заказа нет в бд, но есть в таблице - добавляем в бд
-        4. Если номера заказа нет в таблице, но есть в бд - удаляем из бд """
+        4. Если номера заказа нет в таблице, но есть в бд - удаляем из бд"""
 
         for record in db_data:
             if record.order_number in sheet_data.keys():
@@ -102,13 +104,14 @@ class OrderRepository:
         """Получение просроченых поставок"""
         query = self.db.query(Order)
         today = datetime.date.today()
-        orders = query.filter(Order.notified==False)\
-            .filter(Order.expired_date<today)
+        orders = query.filter(Order.notified == False).filter(
+            Order.expired_date < today
+        )
 
         return orders
 
     def set_notified(self, orders: Query):
-        """Установка маркера, что уведомление о просроченной поставке отправлено """
-        orders.update({'notified': True}, synchronize_session=False)
+        """Установка маркера, что уведомление о просроченной поставке отправлено"""
+        orders.update({"notified": True}, synchronize_session=False)
 
         self.db.commit()

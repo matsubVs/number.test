@@ -1,12 +1,8 @@
 import datetime
-import telebot
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
 import threading
 
+import telebot
 
 bot = telebot.TeleBot(os.getenv("TG_TOKEN"), parse_mode=None)
 

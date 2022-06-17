@@ -1,16 +1,11 @@
-import datetime
-
-from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
-from dotenv import load_dotenv
+from apscheduler.schedulers.blocking import BlockingScheduler
 
-from utils.parse_sheet_data import parse_data
 from database.database import DB
 from repositories.order import OrderRepository
 from sheets_controller.controller import SheetAccessController as Controller
 from tg.sender import send_message
-
-load_dotenv()
+from utils.parse_sheet_data import parse_data
 
 DB.model.metadata.create_all(bind=DB.engine)
 
@@ -37,7 +32,6 @@ def order_date_checker():
         send_message(order.order_number, order.expired_date)
 
     orders_repo.set_notified(orders)
-
 
 
 if __name__ == "__main__":

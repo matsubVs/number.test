@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, Float, Integer, Boolean
+from sqlalchemy import Boolean, Column, Date, Float, Integer
 
 from database.database import DB
 
